@@ -1,7 +1,7 @@
 # Task: Given an m x n matrix, return all elements of the matric in spiral order
 # Input Example: [[1,2,3], [4,5,6], [7,8,9]]
 # Output: [1,2,3,6,9,8,7,4,5]
-# Online example of the task
+# Online example of the task: https://www.geeksforgeeks.org/print-a-given-matrix-in-spiral-form/
 
 def matrix_builder(matrix_size:int):
     """
@@ -30,23 +30,27 @@ def spiral_matrix(input_matrix, return_array = None):
     #get the first row
     for cells in input_matrix[0]:
         return_array.append(cells)
+        print(return_array)
     input_matrix.pop(0)
 
-    #go down
+    #go down (last column, but does not contain the content of the first row, was removed in previous step)
     for rows in input_matrix:
         return_array.append(rows.pop())
+        print(return_array)
 
 
-    #go left at bottom
+    #go left at bottom (bottom row, once again without the content from the last row)
     bottom_row = input_matrix.pop()
     for cell in reversed(bottom_row):
         return_array.append(cell)
+        print(return_array)
 
 
-    # go right if done, else go up
+    # go right if done, else go up (if only 1 list with 2 elements remain get those, else go up on the leftmost column and then recursion)
     if len(input_matrix) == 1 and len(input_matrix[0]) == 2:
         for cell in input_matrix[0]:
             return_array.append(cell)
+            print(return_array)
         input_matrix.pop()
         print(f"Final Return Array: {return_array}")
         print("-------")
@@ -54,6 +58,7 @@ def spiral_matrix(input_matrix, return_array = None):
     else:
         for rows in reversed(input_matrix):
             return_array.append(rows.pop(0))
+            print(return_array)
         spiral_matrix(input_matrix, return_array)
 
 
